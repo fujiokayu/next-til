@@ -50,7 +50,7 @@ export default function FirstPost() {
 <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
 ```
 
-と実装しているが、これはトップレベルにある `public/vercel.svg` を参照している。public をルートとして Asset を参照できる。
+と実装しているが、これはトップレベルにある `public/vercel.svg` を参照しており、public をルートとして Asset を参照できる。  
 なお、トップの public 配下には robots.txtを置いても良い。
 
 #### Metadata
