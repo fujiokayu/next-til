@@ -4,8 +4,8 @@ according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?ut
 
 ## Create a Next.js App
 
-npx などで `create-next-app` を実行してテンプレートを作れるのだが、この時に様々な Example を選ぶことができる。
-[参照](https://qiita.com/takeyuichi/items/a3a2eb2607368eda62fd)
+npx などで `create-next-app` を実行してテンプレートを作成でき、この時に様々な Example を選ぶことができる。  
+[参照](https://qiita.com/takeyuichi/items/a3a2eb2607368eda62fd)  
 with-firebase を使えばバックエンドとの結合も爆速で実装できそう。
 
 ## Navigate Between Pages
