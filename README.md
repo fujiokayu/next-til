@@ -21,8 +21,6 @@ Read <Link href="/posts/first-post"><a>this page!</a></Link>
 ```
 
 ```Javascript
-* /posts/first-post.js
-<pre><code class="Javascript"
 import Link from 'next/link'
 
 export default function FirstPost() {
