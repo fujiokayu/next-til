@@ -40,9 +40,9 @@ export default function FirstPost() {
 関数コンポーネントによるシンプルな実装だが、`<Link href="uri"><a> alias </a></Link>` という書式でページ遷移のように扱える。  
 実際には JavaScript の世界で完結しており(client-side navigation)、そのためパフォーマンスに優れているとのこと。
 
-### Assets, Metadata, and CSS
+## Assets, Metadata, and CSS
 
-#### Assets
+### Assets
 
 サンプルの index.js では
 
@@ -53,16 +53,21 @@ export default function FirstPost() {
 と実装しているが、これはトップレベルにある `public/vercel.svg` を参照しており、public をルートとして Asset を参照できる。  
 なお、トップの public 配下には robots.txtを置いても良い。
 
-#### Metadata
+### Metadata
 
 HTML の `<head>` タグの代わりに React Component の `<Head>` を使用する
 
 ```Javascript
+import Head from 'next/head'
+
 <Head>
   <title>Create Next App</title>
   <link rel="icon" href="/favicon.ico" />
 </Head>
 ```
+
+### CSS Styling
+
 
 ---
 
