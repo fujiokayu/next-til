@@ -68,6 +68,83 @@ import Head from 'next/head'
 
 ### CSS Styling
 
+[styled-jsx](https://github.com/vercel/styled-jsx) というライブラリをビルトインでサポートしている。  
+もちろん、styled-components や emotion を使用することも可能。
+
+### Layout Component
+
+トップレベルディクトりに `components` フォルダを作成し、そこに layout.js を作成する。  
+
+```Javascript
+function Layout({ children }) {
+  return <div>{children}</div>
+}
+
+export default Layout
+```
+
+[CSS Modules](https://nextjs.org/docs/basic-features/built-in-css-support#adding-component-level-css) を使って Layout コンポーネントに CSS を適用する。
+
+- layout.module.css
+
+```Javascript
+.container {
+  max-width: 36rem;
+  padding: 0 1rem;
+  margin: 3rem auto 6rem;
+}
+```
+
+layout.js で layout.module.css を使用する。
+
+```Javascript
+import styles from './layout.module.css'
+
+export default function Layout({ children }) {
+  return <div className={styles.container}>{children}</div>
+}
+```
+
+pages/posts/first-post.js のコンポーネントを Layout タグでラップする。  
+
+```Javascript
+import Head from 'next/head'
+import Link from 'next/link'
+import Layout from '../../components/layout'
+
+export default function FirstPost() {
+  return (
+    <Layout>
+      <Head>
+        <title>First Post</title>
+      </Head>
+      <h1>First Post</h1>
+      <h2>
+        <Link href="/">
+          <a>Back to home</a>
+        </Link>
+      </h2>
+    </Layout>
+  )
+}
+```
+
+Chrome dev tools などで HTML を見ると、CSS Modules によって自動的に作成されたユニークな classname が付与されていることがわかる。
+
+### Global Styles
+
+[global CSS](https://nextjs.org/docs/basic-features/built-in-css-support#adding-a-global-stylesheet) をロードするため、`pages` フォルダに `_app.js` を作成する。
+
+```Javascript
+export default function App({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+```
+
+- global CSS は `pages/_app.js` のみがロードできる
+- global CSS は どこにどんな名前で置いても良い
+- ここではトップレベルに `styles` フォルダを作り、そこに `global.css` というファイル名にする
+- _app.js にインポートする: `import '../styles/global.css'`
 
 ---
 
