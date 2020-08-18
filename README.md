@@ -15,6 +15,7 @@ according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?ut
     - [Global Styles](#global-styles)
   - [Pre-rendering and Data Fetching](#pre-rendering-and-data-fetching)
     - [Pre-rendering](#pre-rendering)
+    - [Two Forms of Pre-rendering](#two-forms-of-pre-rendering)
 
 <!-- /TOC -->
 
@@ -173,6 +174,13 @@ Next.js はデフォルトですべてのページをプリレンダリングす
 
 <img src="https://github.com/fujiokayu/next-til/blob/master/public/images/no-pre-rendering.png" width="300">
 <img src="https://github.com/fujiokayu/next-til/blob/master/public/images/pre-rendering.png" width="300">
+
+### Two Forms of Pre-rendering
+
+Next.js のプリレンダリングは２種類あり、Static Generation と SSR がある。  
+※ development mode だと全て Static Generation されるという罠がある。  
+重要なのはページごとにどのプリレンダリングフォームを使用するかを選択できることであり、これによってハイブリッドな Next.js アプリを作成することができる。  
+基本的には Static Generation を使っていればパフォーマンスが良い。一方で、インタラクティブな処理は SSR で実装するのが良い。
 
 ---
 
