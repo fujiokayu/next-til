@@ -171,10 +171,8 @@ Next.js はデフォルトですべてのページをプリレンダリングす
 これは、Next.js が各ページの HTML を事前に生成することを意味し、クライアント側のJavaScriptですべての処理を行うのではない。  
 プリレンダリングを行うことで、パフォーマンスとSEOを向上させることができる。
 
-![no-pre-rendering.png]](./poblic/images/no-pre-rendering.png)
-
-![pre-rendering.png]](./poblic/images/pre-rendering.png)
-
+<img src="htthttps://github.com/fujiokayu/next-til/blob/master/public/images/no-pre-rendering.png" width="300">
+<img src="htthttps://github.com/fujiokayu/next-til/blob/master/public/images/pre-rendering.png" width="300">
 
 ---
 
