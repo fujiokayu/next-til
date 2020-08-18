@@ -53,7 +53,8 @@ export default function FirstPost() {
 }
 ```
 
-関数コンポーネントによるシンプルな実装だが、`<Link href="uri"><a> alias </a></Link>` という書式でページ遷移のように扱える。  
+関数コンポーネントによるシンプルな実装だが、`<Link href="uri"><a> alias </a></Link>` という書式でページ遷移のように扱える。 
+React Router が必要ないのはありがたい。  
 実際には JavaScript の世界で完結しており(client-side navigation)、そのためパフォーマンスに優れているとのこと。
 
 ## Assets, Metadata, and CSS
