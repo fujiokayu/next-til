@@ -16,6 +16,7 @@ according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?ut
   - [Pre-rendering and Data Fetching](#pre-rendering-and-data-fetching)
     - [Pre-rendering](#pre-rendering)
     - [Two Forms of Pre-rendering](#two-forms-of-pre-rendering)
+    - [Static Generation with and without Data](#static-generation-with-and-without-data)
 
 <!-- /TOC -->
 
@@ -180,7 +181,27 @@ Next.js はデフォルトですべてのページをプリレンダリングす
 Next.js のプリレンダリングは２種類あり、Static Generation と SSR がある。  
 ※ development mode だと全て Static Generation されるという罠がある。  
 重要なのはページごとにどのプリレンダリングフォームを使用するかを選択できることであり、これによってハイブリッドな Next.js アプリを作成することができる。  
-基本的には Static Generation を使っていればパフォーマンスが良い。一方で、インタラクティブな処理は SSR で実装するのが良い。
+基本的には Static Generation を使っていればパフォーマンスが良い。一方で、インタラクティブな処理は SSR で実装するのが良いだろう。
+
+### Static Generation with and without Data
+
+Static Generation はアプリがビルドされた時に自動的に生成される。  
+ファイルシステムにアクセスしたり、外部 API からデータを取得したり、ビルド時にデータベースに問い合わせたりする場合は、[getStaticProps](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation) という非同期関数をエクスポートすることで対応する。
+
+```Javascript
+export default function Home(props) { ... }
+
+export async function getStaticProps() {
+  // Get external data from the file system, API, DB, etc.
+  const data = ...
+
+  // The value of the `props` key will be
+  //  passed to the `Home` component
+  return {
+    props: ...
+  }
+}
+```
 
 ---
 
