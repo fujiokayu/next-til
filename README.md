@@ -17,6 +17,10 @@ according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?ut
     - [Pre-rendering](#pre-rendering)
     - [Two Forms of Pre-rendering](#two-forms-of-pre-rendering)
     - [Static Generation with and without Data](#static-generation-with-and-without-data)
+    - [Implement getStaticProps](#implement-getstaticprops)
+    - [getStaticProps Details](#getstaticprops-details)
+      - [Fetching Data at Request Time](#fetching-data-at-request-time)
+      - [SWR](#swr)
 
 <!-- /TOC -->
 
@@ -202,6 +206,82 @@ export async function getStaticProps() {
   }
 }
 ```
+
+### Implement getStaticProps
+
+See [this Commit](bf2218a678ce39821c6f31f173eff0966033969e)
+
+### getStaticProps Details
+
+前項ではファイルシステムからデータを取得する getSortedPostsData を実装したが、getStaticProps はサーバー側でのみ実行されるため、もちろん外部 API なども利用できる。  
+ブラウザ用の JS バンドルにも含まれず、ブラウザに送信されることなく、データベースへの直接問い合わせのようなコードを書くことが可能。
+
+```Javascript
+import fetch from 'node-fetch'
+
+export async function getSortedPostsData() {
+  // Instead of the file system,
+  // fetch post data from an external API endpoint
+  const res = await fetch('..')
+  return res.json()
+}
+```
+
+```Javascript
+import someDatabaseSDK from 'someDatabaseSDK'
+
+const databaseClient = someDatabaseSDK.createClient(...)
+
+export async function getSortedPostsData() {
+  // Instead of the file system,
+  // fetch post data from a database
+  return databaseClient.query('SELECT posts...')
+}
+```
+
+- 注意事項
+  - 開発環境 (npm run dev や yarn dev) では、getStaticProps はリクエストごとに実行され、本番環境では、getStaticProps はビルド時に実行される
+    - つまり本番環境ではクエリパラメータや HTTP ヘッダなど、リクエスト時にしか利用できないデータを使用することはできない  
+  - React はページがレンダリングされる前に必要なデータをすべて持っている必要があるため、getStaticProps はページからしかエクスポートできない
+    - そのような場合は、SSR を試すか、プリレンダリングをスキップすることができる
+
+#### Fetching Data at Request Time
+
+SSR を使用するには、getStaticProps の代わりに getServerSideProps をエクスポートする必要があります。
+
+```Javascript
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      // props for your component
+    }
+  }
+}
+```
+
+getServerSideProps はリクエスト時に呼び出されるので、そのパラメータ(context)はリクエスト固有のパラメータを含む。  
+Time to first byte (TTFB) は getStaticProps よりも遅くなるため、リクエスト時にデータを取得しなければならないページをプリレンダリングする必要がある場合にのみ getServerSideProps を使用すること。  
+
+事前に生成しておくことができないケースでは、Client-side Rendering で動的にレンダリングすると良い。
+
+#### SWR
+
+Next.js が開発したデータフェッチ用の React フック。  
+キャッシング、再検証、フォーカストラッキング、インターバルでのリフェッチなどを処理する。
+
+```Javascript
+import useSWR from 'swr'
+
+function Profile() {
+  const { data, error } = useSWR('/api/user', fetch)
+
+  if (error) return <div>failed to load</div>
+  if (!data) return <div>loading...</div>
+  return <div>hello {data.name}!</div>
+}
+```
+
+[more info](https://swr.vercel.app/)
 
 ---
 
