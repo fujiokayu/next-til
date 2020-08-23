@@ -21,6 +21,7 @@ according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?ut
     - [getStaticProps Details](#getstaticprops-details)
       - [Fetching Data at Request Time](#fetching-data-at-request-time)
       - [SWR](#swr)
+  - [Dynamic Routes](#dynamic-routes)
 
 <!-- /TOC -->
 
@@ -282,6 +283,10 @@ function Profile() {
 ```
 
 [more info](https://swr.vercel.app/)
+
+## Dynamic Routes
+
+
 
 ---
 
