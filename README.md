@@ -1,10 +1,10 @@
-# today i learned NEXT.js
+# today i learned Next.js
 
 according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?utm_source=next-site&utm_medium=homepage-cta&utm_campaign=next-website) published by Vercel.
 
 <!-- TOC -->
 
-- [today i learned NEXT.js](#today-i-learned-nextjs)
+- [today i learned Next.js](#today-i-learned-nextjs)
   - [Create a Next.js App](#create-a-nextjs-app)
   - [Navigate Between Pages](#navigate-between-pages)
   - [Assets, Metadata, and CSS](#assets-metadata-and-css)
@@ -286,7 +286,7 @@ function Profile() {
 
 ## Dynamic Routes
 
-
+<img src="https://github.com/fujiokayu/next-til/blob/master/public/images/dynamic-routes.png" width="300">
 
 ---
 
