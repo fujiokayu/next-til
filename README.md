@@ -210,7 +210,7 @@ export async function getStaticProps() {
 
 ### Implement getStaticProps
 
-See [this Commit](bf2218a678ce39821c6f31f173eff0966033969e)
+See [this commit](https://github.com/fujiokayu/next-til/commit/bf2218a678ce39821c6f31f173eff0966033969e)
 
 ### getStaticProps Details
 
@@ -286,6 +286,7 @@ function Profile() {
 
 ## Dynamic Routes
 
+See [this commit](https://github.com/fujiokayu/next-til/commit/660044032e112461f5e04d1f7ddc9fad24b3edcf)
 <img src="https://github.com/fujiokayu/next-til/blob/master/public/images/dynamic-routes.png" width="300">
 
 ---
