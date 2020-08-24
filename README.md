@@ -22,6 +22,8 @@ according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?ut
       - [Fetching Data at Request Time](#fetching-data-at-request-time)
       - [SWR](#swr)
   - [Dynamic Routes](#dynamic-routes)
+    - [Page Path Depends on External Data](#page-path-depends-on-external-data)
+    - [Render Markdown](#render-markdown)
 
 <!-- /TOC -->
 
@@ -286,8 +288,61 @@ function Profile() {
 
 ## Dynamic Routes
 
+### Page Path Depends on External Data
+
 See [this commit](https://github.com/fujiokayu/next-til/commit/660044032e112461f5e04d1f7ddc9fad24b3edcf)
 <img src="https://github.com/fujiokayu/next-til/blob/master/public/images/dynamic-routes.png" width="300">
+
+### Render Markdown
+
+markdown コンテンツのレンダリングには [remark](https://github.com/remarkjs/remark) ライブラリを使う。  
+`npm install remark remark-html`
+
+```Javascript
+import remark from 'remark'
+import html from 'remark-html'
+```
+
+```Javascript
+export async function getPostData(id) {
+  const fullPath = path.join(postsDirectory, `${id}.md`)
+  const fileContents = fs.readFileSync(fullPath, 'utf8')
+
+  // Use gray-matter to parse the post metadata section
+  const matterResult = matter(fileContents)
+
+  // Use remark to convert markdown into HTML string
+  const processedContent = await remark()
+    .use(html)
+    .process(matterResult.content)
+  const contentHtml = processedContent.toString()
+
+  // Combine the data with the id and contentHtml
+  return {
+    id,
+    contentHtml,
+    ...matterResult.data
+  }
+}
+```
+
+```Javascript
+export default function Post({ postData }) {
+  return (
+    <Layout>
+      {postData.title}
+      <br />
+      {postData.id}
+      <br />
+      {postData.date}
+      <br />
+      <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+    </Layout>
+  )
+}
+```
+
+dangerouslySetInnerHTML 使うのは嫌だ・・・
 
 ---
 
