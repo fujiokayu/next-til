@@ -24,6 +24,10 @@ according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?ut
   - [Dynamic Routes](#dynamic-routes)
     - [Page Path Depends on External Data](#page-path-depends-on-external-data)
     - [Render Markdown](#render-markdown)
+    - [Polishing the Post Page](#polishing-the-post-page)
+      - [Adding title to the Post Page](#adding-title-to-the-post-page)
+      - [Formatting the Date](#formatting-the-date)
+      - [Adding CSS](#adding-css)
 
 <!-- /TOC -->
 
@@ -342,7 +346,87 @@ export default function Post({ postData }) {
 }
 ```
 
-dangerouslySetInnerHTML 使うのは嫌だ・・・
+dangerouslySetInnerHTML を使うのは嫌だ・・・
+
+### Polishing the Post Page
+
+#### Adding title to the Post Page
+
+```Javascript
+// Add this line to imports
+import Head from 'next/head'
+
+export default function Post({ postData }) {
+  return (
+    <Layout>
+      <Head>
+        <title>{postData.title}</title>
+      </Head>
+      ...
+    </Layout>
+  )
+}
+```
+
+#### Formatting the Date
+
+`npm install date-fns`
+
+create the Date component at components/date.js
+
+```Javascript
+import { parseISO, format } from 'date-fns'
+
+export default function Date({ dateString }) {
+  const date = parseISO(dateString)
+  return <time dateTime={dateString}>{format(date, 'LLLL d, yyyy')}</time>
+}
+```
+
+```Javascript
+// Add this line to imports
+import Date from '../../components/date'
+
+export default function Post({ postData }) {
+  return (
+    <Layout>
+      ...
+      {/* Replace {postData.date} with this */}
+      <Date dateString={postData.date} />
+      ...
+    </Layout>
+  )
+}
+```
+
+今まで Moment を使っていたので date-fns を知らなかったのだけれど、これは良さそう。(Next 関係ない)  
+この開発者は Moment に対して問題を感じてこのライブラリを開発したそうだ。
+
+- 参考: [面倒なJavaScriptの日付の処理は「date-fns」でラクに片付けよう](https://www.webprofessional.jp/date-fns-javascript-date-library/)
+
+#### Adding CSS
+
+```Javascript
+// Add this line
+import utilStyles from '../../styles/utils.module.css'
+
+export default function Post({ postData }) {
+  return (
+    <Layout>
+      <Head>
+        <title>{postData.title}</title>
+      </Head>
+      <article>
+        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+        <div className={utilStyles.lightText}>
+          <Date dateString={postData.date} />
+        </div>
+        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      </article>
+    </Layout>
+  )
+}
+```
 
 ---
 
