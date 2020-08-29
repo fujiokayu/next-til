@@ -28,6 +28,8 @@ according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?ut
       - [Adding title to the Post Page](#adding-title-to-the-post-page)
       - [Formatting the Date](#formatting-the-date)
       - [Adding CSS](#adding-css)
+    - [Polishing the Index Page](#polishing-the-index-page)
+    - [Dynamic Routes Details](#dynamic-routes-details)
 
 <!-- /TOC -->
 
@@ -427,6 +429,42 @@ export default function Post({ postData }) {
   )
 }
 ```
+
+### Polishing the Index Page
+
+Link コンポーネントを使って各ページへのリンクを貼る場合は以下のように実装する。
+
+```Javascript
+<Link href="/posts/[id]" as="/posts/ssg-ssr">
+  <a>...</a>
+</Link>
+```
+
+href タグに[id]を渡し、as props に ssg-ssr へのパスを指定する必要がある。
+pages/index.js に以下を追加し、
+
+```Javascript
+import Link from 'next/link'
+import Date from '../components/date'
+```
+
+Home コンポーネントの `<li>` タグを以下に書き換える。
+
+```Javascript
+<li className={utilStyles.listItem} key={id}>
+  <Link href="/posts/[id]" as={`/posts/${id}`}>
+    <a>{title}</a>
+  </Link>
+  <br />
+  <small className={utilStyles.lightText}>
+    <Date dateString={date} />
+  </small>
+</li>
+```
+
+### Dynamic Routes Details
+
+
 
 ---
 
