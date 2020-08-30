@@ -30,6 +30,13 @@ according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?ut
       - [Adding CSS](#adding-css)
     - [Polishing the Index Page](#polishing-the-index-page)
     - [Dynamic Routes Details](#dynamic-routes-details)
+      - [Fetch External API or Query Database](#fetch-external-api-or-query-database)
+      - [Development v.s. Production](#development-vs-production)
+      - [Fallback](#fallback)
+      - [Catch-all Routes](#catch-all-routes)
+      - [Router](#router)
+      - [404 Pages](#404-pages)
+      - [More Examples](#more-examples)
 
 <!-- /TOC -->
 
@@ -464,7 +471,60 @@ Home コンポーネントの `<li>` タグを以下に書き換える。
 
 ### Dynamic Routes Details
 
+#### Fetch External API or Query Database
 
+getAllPostIds で外部 API からデータを取得するサンプル
+
+```Javascript
+export async function getAllPostIds() {
+  // Instead of the file system,
+  // fetch post data from an external API endpoint
+  const res = await fetch('..')
+  const posts = await res.json()
+  return posts.map(post => {
+    return {
+      params: {
+        id: post.id
+      }
+    }
+  })
+}
+```
+
+#### Development v.s. Production
+
+- In development (npm run dev or yarn dev), getStaticPaths runs on every request.
+- In production, getStaticPaths runs at build time.
+
+#### Fallback
+
+getStaticPaths から fallback: false がリターンされた場合、指定されたパスが 404 not found。  
+
+- fallback is true の場合、パスがリターンされてビルド時に HTML がレンダリングされる。
+- false でないにも関わらずパスが生成されなかった場合は 404 ではなく、Next.js は fallback version を提供する？
+  - ここら辺は [fallback documentation](https://nextjs.org/docs/basic-features/data-fetching#the-fallback-key-required) をちゃんと読もう
+
+#### Catch-all Routes
+
+pages/posts/[...id].js matches /posts/a, but also /posts/a/b, /posts/a/b/c and so on.  
+[https://nextjs.org/docs/routing/dynamic-routes#catch-all-routes](https://nextjs.org/docs/routing/dynamic-routes#catch-all-routes)
+
+#### Router
+
+[useRouter](https://nextjs.org/docs/api-reference/next/router#userouter) という hook がある。  
+Link コンポーネントがなくても必要なのか・・・？
+
+#### 404 Pages
+
+pages/404.js カスタム 404 ページを作れる。
+
+#### More Examples
+
+- [Blog Starter using markdown files](https://github.com/vercel/next.js/tree/canary/examples/blog-starter)
+- [WordPress Example](https://github.com/vercel/next.js/tree/canary/examples/cms-wordpress)
+- [DatoCMS Example](https://github.com/vercel/next.js/tree/canary/examples/cms-datocms)
+- [TakeShape Example](https://github.com/vercel/next.js/tree/canary/examples/cms-takeshape)
+- [Sanity Example](https://github.com/vercel/next.js/tree/canary/examples/cms-sanity)
 
 ---
 
