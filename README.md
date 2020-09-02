@@ -37,6 +37,9 @@ according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?ut
       - [Router](#router)
       - [404 Pages](#404-pages)
       - [More Examples](#more-examples)
+  - [API Routes](#api-routes)
+    - [Creating API Routes](#creating-api-routes)
+    - [Creating a simple API endpoint](#creating-a-simple-api-endpoint)
 
 <!-- /TOC -->
 
@@ -525,6 +528,25 @@ pages/404.js カスタム 404 ページを作れる。
 - [DatoCMS Example](https://github.com/vercel/next.js/tree/canary/examples/cms-datocms)
 - [TakeShape Example](https://github.com/vercel/next.js/tree/canary/examples/cms-takeshape)
 - [Sanity Example](https://github.com/vercel/next.js/tree/canary/examples/cms-sanity)
+
+## API Routes
+
+### Creating API Routes
+
+[API Routes](https://nextjs.org/docs/api-routes/introduction) を使用すると、Next.js アプリ内に API エンドポイントを作成することができる。  
+これは pages/api ディレクトリ内に関数を作成することで作成し、Serverless Functions としてデプロイできる。  
+
+### Creating a simple API endpoint
+
+pages/api/hello.js
+
+```Javascript
+export default (req, res) => {
+  res.status(200).json({ text: 'Hello' })
+}
+```
+
+req は [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage) の、res は [http.ServerResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse) のインスタンス。
 
 ---
 
