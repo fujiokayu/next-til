@@ -40,6 +40,11 @@ according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?ut
   - [API Routes](#api-routes)
     - [Creating API Routes](#creating-api-routes)
     - [Creating a simple API endpoint](#creating-a-simple-api-endpoint)
+    - [API Routes Details](#api-routes-details)
+      - [Do Not Fetch an API Route from getStaticProps or getStaticPaths](#do-not-fetch-an-api-route-from-getstaticprops-or-getstaticpaths)
+      - [A Good Use Case: Handling Form Input](#a-good-use-case-handling-form-input)
+      - [Preview Mode](#preview-mode)
+      - [Dynamic API Routes](#dynamic-api-routes)
 
 <!-- /TOC -->
 
@@ -547,6 +552,36 @@ export default (req, res) => {
 ```
 
 req は [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage) の、res は [http.ServerResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse) のインスタンス。
+
+### API Routes Details
+
+#### Do Not Fetch an API Route from getStaticProps or getStaticPaths
+
+getStaticProps と getStaticPaths はサーバーサイドでのみ実行されるため、API Route を getStaticProps や getStaticPaths から取得してはいけない。  
+代わりに、サーバーサイドのコードを直接 getStaticProps や getStaticPaths に記述するか、ヘルパー関数を呼び出すこと
+
+#### A Good Use Case: Handling Form Input
+
+API Routes の良いユースケースはフォーム入力の処理。  
+例えばページ上にフォームを作成し、そのフォームからAPIルートにPOSTリクエストを送信させることができ、それを直接データベースに保存するコードを書くことができる。  
+API Route コードはクライアントバンドルの一部ではないので、サーバーサイドのコードを安全に書くことができる。
+
+```Javascript
+export default (req, res) => {
+  const email = req.body.email
+  // Then save email to your database, etc...
+}
+```
+
+#### Preview Mode
+
+[Static Generation](https://nextjs.org/docs/basic-features/pages#static-generation-recommended) はページがヘッドレス CMS からデータを取得する場合に便利だが、ヘッドレス CMS で下書きを書いていて、その下書きをすぐにページ上でプレビューしたい場合には理想的ではない。  
+Next.js ではこれらのページをビルド時ではなくリクエスト時にレンダリングし、公開されたコンテンツではなくドラフトコンテンツを取得するようにしたいと思う場合に限って、Next.js はスタティック生成をバイパスする。
+
+#### Dynamic API Routes
+
+API Routes は通常のページと同様に動的に設定することができる。詳しくは [Dynamic API Routes のドキュメント](https://nextjs.org/docs/api-routes/dynamic-api-routes)
+
 
 ---
 
