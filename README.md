@@ -45,6 +45,9 @@ according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?ut
       - [A Good Use Case: Handling Form Input](#a-good-use-case-handling-form-input)
       - [Preview Mode](#preview-mode)
       - [Dynamic API Routes](#dynamic-api-routes)
+  - [Deploying Your Next.js App](#deploying-your-nextjs-app)
+    - [Push to GitHub](#push-to-github)
+    - [Deploy to Vercel](#deploy-to-vercel)
 
 <!-- /TOC -->
 
@@ -581,6 +584,25 @@ Next.js ではこれらのページをビルド時ではなくリクエスト時
 #### Dynamic API Routes
 
 API Routes は通常のページと同様に動的に設定することができる。詳しくは [Dynamic API Routes のドキュメント](https://nextjs.org/docs/api-routes/dynamic-api-routes)
+
+## Deploying Your Next.js App
+
+### Push to GitHub
+
+リポジトリはパブリックでもプライベートでも OK。
+
+### Deploy to Vercel
+
+Next.js を本番環境にデプロイする最も簡単な方法は、Next.js の開発者が開発した Vercel プラットフォームを利用すること。  
+Vercel はスタティック＆JAMstack デプロイをサポートするグローバル CDN とサーバーレス機能を備えたオールインワンのプラットフォーム。  
+クレジットカード不要で無料で利用できる。  
+
+1. まず、https://vercel.com/signup にアクセスして、Vercel のアカウントを作成。  
+1. Continue with GitHub を選択し、サインアップの手続きを行う。（Full Name を入力するくらい）
+1. リポジトリの URL を指定。これだったら https://github.com/fujiokayu/next-til
+1. GitHub 用に Vercel をインストールする。この時に前リポジトリにアクセス権を与えるか、個別のリポジトリにするか設定できる
+1. デプロイの設定はほぼ自動で推測してくれたのでそのまま Deploy
+1. デプロイ後に公開リンクが表示される。 https://next-til.vercel.app/
 
 
 ---
