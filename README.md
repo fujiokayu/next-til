@@ -48,6 +48,9 @@ according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?ut
   - [Deploying Your Next.js App](#deploying-your-nextjs-app)
     - [Push to GitHub](#push-to-github)
     - [Deploy to Vercel](#deploy-to-vercel)
+    - [Next.js and Vercel](#nextjs-and-vercel)
+      - [Preview Deployment for Every Push](#preview-deployment-for-every-push)
+    - [Other Hosting Options](#other-hosting-options)
 
 <!-- /TOC -->
 
@@ -604,6 +607,49 @@ Vercel はスタティック＆JAMstack デプロイをサポートするグロ�
 1. デプロイの設定はほぼ自動で推測してくれたのでそのまま Deploy
 1. デプロイ後に公開リンクが表示される。 https://next-til.vercel.app/
 
+### Next.js and Vercel
+
+Next.js アプリを Vercel にデプロイするとデフォルトで以下のようになる。  
+
+- 静的生成とアセット（JS、CSS、画像、フォントなど）を使用するページは、自動的に Vercel Edge Network から提供される
+- サーバーサイドレンダリングと API ルートを使用するページは、自動的に分離されたサーバーレス関数になる
+  - これにより、ページのレンダリングや API リクエストを無限にスケールさせることができる
+  
+Vercelには他にも以下のような機能がある。
+
+- Custom Domains
+  - Vercel にデプロイすると Next.js アプリにカスタムドメインを割り当てることができる。see [this documentation](https://vercel.com/docs/custom-domains)
+- Environment Variables
+  - Vercel 上で環境変数を設定することができる。see [this documentation](https://vercel.com/docs/build-step#environment-variables)
+- Automatic HTTPS
+  - HTTPS はデフォルトで有効になっており（カスタムドメインを含む）、特別な設定は必要なく、SSL 証明書は自動更新される。
+  
+[more information]](https://vercel.com/docs)
+
+#### Preview Deployment for Every Push
+
+Vercel にデプロイした後、新しいプルリクエストを送ると Vercel bot がその変更を適用したプレビュー画面の URL をコメントしてくれる
+
+### Other Hosting Options
+
+Next.js は Node.js をサポートしているホスティングプロバイダであればどこにでもデプロイすることができる。  
+ここまでの手順を踏めば、package.jsonにはビルドスクリプトとスタートスクリプトが含まれているはず  
+
+```Json
+{
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  }
+}
+```
+
+`npm run build` でビルドすると、.next フォルダ内に本番アプリケーションがビルドされる。  
+`npm run start` でハイブリッドページをサポートする Node.js サーバが起動され、静的に生成されたページとサーバサイドでレンダリングされたページの両方を提供し、APIルートを提供する  。
+  
+package.json のスタートスクリプトを以下のように編集するとポートも指定できる。
+`"start": "next start -p $PORT"`
 
 ---
 
