@@ -51,6 +51,8 @@ according to [this Tutrial](https://nextjs.org/learn/basics/create-nextjs-app?ut
     - [Next.js and Vercel](#nextjs-and-vercel)
       - [Preview Deployment for Every Push](#preview-deployment-for-every-push)
     - [Other Hosting Options](#other-hosting-options)
+    - [Finally](#finally)
+      - [Join the Conversation](#join-the-conversation)
 
 <!-- /TOC -->
 
@@ -650,6 +652,18 @@ Next.js は Node.js をサポートしているホスティングプロバイダ
   
 package.json のスタートスクリプトを以下のように編集するとポートも指定できる。
 `"start": "next start -p $PORT"`
+
+### Finally
+
+- TypeScript を使いたい場合は [see this document](https://nextjs.org/learn/excel/typescript)
+- 次に学ぶことのおすすめは以下
+  - [Data Fetching](https://nextjs.org/docs/basic-features/data-fetching)
+  - [Environment Variables](https://nextjs.org/docs/basic-features/environment-variables)
+  - [AMP Support](https://nextjs.org/docs/advanced-features/amp-support/introduction)
+
+#### Join the Conversation
+
+Next.js に質問があれば [GitHub Discussions](https://github.com/vercel/next.js/discussions) へ
 
 ---
 
