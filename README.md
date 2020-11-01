@@ -626,7 +626,7 @@ Vercelには他にも以下のような機能がある。
 - Automatic HTTPS
   - HTTPS はデフォルトで有効になっており（カスタムドメインを含む）、特別な設定は必要なく、SSL 証明書は自動更新される。
   
-[more information]](https://vercel.com/docs)
+[more information](https://vercel.com/docs)
 
 #### Preview Deployment for Every Push
 
