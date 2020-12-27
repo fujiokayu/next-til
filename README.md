@@ -128,7 +128,7 @@ import Head from 'next/head'
 
 ### Layout Component
 
-トップレベルディクトりに `components` フォルダを作成し、そこに layout.js を作成する。  
+トップレベルディクトリに `components` フォルダを作成し、そこに layout.js を作成する。  
 
 ```Javascript
 function Layout({ children }) {
